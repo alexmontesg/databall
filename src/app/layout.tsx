@@ -51,7 +51,7 @@ export default function RootLayout({
         <div className="grid grid-rows-[auto_1fr_auto] min-h-screen font-sans">
           <SiteHeader />
 
-          <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-[225px_1fr] flex-1">
             <Sidebar />
             <main className="flex flex-1 flex-col gap-8 w-full py-8 px-4 md:px-12">
               {children}
