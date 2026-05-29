@@ -8,6 +8,9 @@ import {
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
+import SiteHeader from "@/components/organisms/header";
+import Sidebar from "@/components/organisms/sidebar";
+
 const playfairDisplayHeading = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",
@@ -50,18 +53,14 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <div className="grid grid-rows-[auto_1fr_auto] min-h-screen font-sans">
-          <header className="sticky top-0 z-50 border-b px-4 py-6">
-            Header
-          </header>
+          <SiteHeader />
 
           <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] flex-1">
-            <aside className="hidden md:block border-r px-4 py-6">
-              {/* TODO Nav menu */}
-            </aside>
+            <Sidebar />
             <main className="flex flex-1 w-full py-8 px-12">{children}</main>
           </div>
 
-          <footer className="border-t px-4 py-6">Footer</footer>
+          <footer className="border-t px-4 md:px-24 py-6">Footer</footer>
         </div>
       </body>
     </html>
