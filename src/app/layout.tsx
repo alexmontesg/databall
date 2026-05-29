@@ -57,7 +57,9 @@ export default function RootLayout({
 
           <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] flex-1">
             <Sidebar />
-            <main className="flex flex-1 w-full py-8 px-12">{children}</main>
+            <main className="flex flex-1 flex-col gap-8 w-full py-8 px-12">
+              {children}
+            </main>
           </div>
 
           <footer className="border-t px-4 md:px-24 py-6">Footer</footer>
