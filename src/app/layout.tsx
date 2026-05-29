@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import {
-  Geist,
-  Geist_Mono,
-  Noto_Sans,
-  Playfair_Display, Inter } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
 import SiteHeader from "@/components/organisms/header";
 import Sidebar from "@/components/organisms/sidebar";
+import SiteFooter from "@/components/organisms/footer";
 
 const playfairDisplayHeading = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-heading",
 });
 
-const inter = Inter({subsets:['latin'],variable:'--font-sans'});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,7 +58,7 @@ export default function RootLayout({
             </main>
           </div>
 
-          <footer className="border-t px-4 md:px-24 py-6">Footer</footer>
+          <SiteFooter />
         </div>
       </body>
     </html>
