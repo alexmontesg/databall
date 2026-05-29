@@ -9,6 +9,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useLogsStore } from "@/features/logs/stores/logs-store";
+import { cn } from "@/lib/utils";
+
+const levelStyles = {
+  INFO: "text-cyan-400",
+  WARNING: "text-yellow-400",
+  CRITICAL: "text-red-500",
+};
 
 export default function LogsTable() {
   const logs = useLogsStore((s) => s.logs);
@@ -31,7 +38,11 @@ export default function LogsTable() {
                 {new Date(log.timestamp).toLocaleTimeString()}
               </TableCell>
 
-              <TableCell className="text-xs">{log.level}</TableCell>
+              <TableCell
+                className={cn("text-xs font-semibold", levelStyles[log.level])}
+              >
+                {log.level}
+              </TableCell>
 
               <TableCell className="font-mono text-xs">{log.message}</TableCell>
             </TableRow>
