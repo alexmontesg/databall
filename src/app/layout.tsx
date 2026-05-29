@@ -3,8 +3,7 @@ import {
   Geist,
   Geist_Mono,
   Noto_Sans,
-  Playfair_Display,
-} from "next/font/google";
+  Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +15,7 @@ const playfairDisplayHeading = Playfair_Display({
   variable: "--font-heading",
 });
 
-const notoSans = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
+const inter = Inter({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -47,7 +46,7 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         "font-sans",
-        notoSans.variable,
+        inter.variable,
         playfairDisplayHeading.variable,
       )}
     >
@@ -57,7 +56,7 @@ export default function RootLayout({
 
           <div className="grid grid-cols-1 md:grid-cols-[200px_1fr] flex-1">
             <Sidebar />
-            <main className="flex flex-1 flex-col gap-8 w-full py-8 px-12">
+            <main className="flex flex-1 flex-col gap-8 w-full py-8 px-4 md:px-12">
               {children}
             </main>
           </div>
