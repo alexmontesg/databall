@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useLogsStore } from "@/features/logs/stores/logs-store";
-const LOGS_API = "http://localhost:3000/api/logs/stream";
+const LOGS_API = "/api/logs/stream";
 
 export function useLogsStream() {
   const addLog = useLogsStore((s) => s.addLog);
