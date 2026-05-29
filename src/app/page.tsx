@@ -1,6 +1,22 @@
-import PowerLevelChart from "@/features/metrics/components/power-level";
-import CombatStatsChart from "@/features/metrics/components/combat-stats";
+import dynamic from "next/dynamic";
+
+import { Skeleton } from "@/components/ui/skeleton";
+
 import BallsFound from "@/features/metrics/components/balls-found";
+
+const PowerLevelChart = dynamic(
+  () => import("@/features/metrics/components/power-level"),
+  {
+    loading: () => <Skeleton className="h-full" />,
+  },
+);
+
+const CombatStatsChart = dynamic(
+  () => import("@/features/metrics/components/combat-stats"),
+  {
+    loading: () => <Skeleton className="h-full" />,
+  },
+);
 
 export default function Home() {
   return (
