@@ -40,13 +40,21 @@ const LogsTableRow = memo(function LogsTableRow({ log }: { log: LogEvent }) {
 
 export default function LogsTable() {
   const logs = useLogsStore((s) => s.logs);
+  const isConnected = useLogsStore((s) => s.isConnected);
   const { levels } = useFilters();
   const filteredLogs = logs.filter((l) => {
     return levels.length === 0 || levels.includes(l.level);
   });
 
   return (
-    <div className="max-h-[600px] overflow-auto">
+    <div className="max-h-[600px] overflow-auto flex flex-col gap-2">
+      <div className="flex items-center gap-2 px-1 py-2 text-xs text-muted-foreground">
+        <span
+          className={`inline-block w-2 h-2 rounded-full ${isConnected ? "bg-green-500" : "bg-red-500"}`}
+        />
+        {isConnected ? "Receiving data" : "Disconnected"}
+      </div>
+
       <Table>
         <TableHeader>
           <TableRow>
