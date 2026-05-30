@@ -1,25 +1,14 @@
 import { notFound } from "next/navigation";
 import { headers } from "next/headers";
-import { GlobeCheck, GlobeOff, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import PageTitle from "@/components/molecules/page-title";
+import EnvironmentDetail, {
+  type EnvironmentDetailPlanet,
+} from "@/features/environments/components/environment-detail";
 
-interface PlanetResponse {
-  id: number;
-  name: string;
-  isUp: boolean;
-  version: { id: number; version: string };
-  availableVersions: { id: number; version: string }[];
-}
-
-export default async function EnvironmentDetail({
+export default async function EnvironmentDetailPage({
   params,
 }: {
   params: Promise<{ id: string }>;
@@ -35,37 +24,13 @@ export default async function EnvironmentDetail({
     return notFound();
   }
 
-  const planet: PlanetResponse = await res.json();
+  const planet: EnvironmentDetailPlanet = await res.json();
 
   return (
     <>
       <PageTitle>{planet.name}</PageTitle>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Status</CardTitle>
-        </CardHeader>
-        <CardContent>
-          {planet.isUp ? (
-            <div className="flex flex-row gap-2 items-center">
-              <GlobeCheck className="text-cyan-400" />
-              <span>Up and running</span>
-            </div>
-          ) : (
-            <div className="flex flex-row gap-2 items-center">
-              <GlobeOff className="text-destructive" />
-              <span>Not responding</span>
-            </div>
-          )}
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Version</CardTitle>
-        </CardHeader>
-        <CardContent>{planet.version.version}</CardContent>
-      </Card>
+      <EnvironmentDetail planet={planet} />
 
       <Button asChild variant="outline">
         <Link href="/environments">

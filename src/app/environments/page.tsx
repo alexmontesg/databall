@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import PageTitle from "@/components/molecules/page-title";
 import EnvironmentsList from "@/features/environments/components/environments-list";
 
+export const dynamic = "force-dynamic";
+
 export default async function Environments() {
   const headersList = await headers();
   const host = headersList.get("host");
