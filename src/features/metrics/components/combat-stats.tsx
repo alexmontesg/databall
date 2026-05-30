@@ -17,14 +17,8 @@ import {
 } from "@/components/ui/chart";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
-
-const chartData = [
-  { name: "Health", value: 2 },
-  { name: "Ki", value: 3 },
-  { name: "Attack", value: 3 },
-  { name: "Defense", value: 2 },
-  { name: "Speed", value: 3 },
-];
+import useMetricsClient from "../hooks/use-metrics-client";
+import ErrorState from "@/components/organisms/error-state";
 
 const chartConfig = {
   goku: {
@@ -34,6 +28,11 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 function CombatStatsChart() {
+  const { chartData, isLoading, error } =
+    useMetricsClient<Array<{ name: string; value: number }>>("stats");
+  if (isLoading) return <Skeleton className="h-80" />;
+  if (error) return <ErrorState />;
+
   return (
     <Card className="h-full">
       <CardHeader className="items-center pb-4">

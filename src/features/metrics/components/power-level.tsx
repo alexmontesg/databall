@@ -12,22 +12,28 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
 import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
-
-const chartData = [
-  { character: "goku", powerLevel: 9001, fill: "var(--color-goku)" },
-];
+import useMetricsClient from "../hooks/use-metrics-client";
+import ErrorState from "@/components/organisms/error-state";
+const MAX_POWER_LEVEL = 25000;
 
 const chartConfig = {
   powerLevel: {
     label: "Power Level",
   },
-  goku: {
-    label: "Goku",
-    color: "var(--chart-2)",
-  },
 } satisfies ChartConfig;
 
 function PowerLevelChart() {
+  const { chartData, isLoading, error } =
+    useMetricsClient<Array<{ powerLevel: number }>>("power-level");
+  if (isLoading) return <Skeleton className="h-80" />;
+  if (error) return <ErrorState />;
+
+  const data = chartData?.map((data) => ({
+    ...data,
+    fill: "var(--chart-2)",
+    endAngle: Math.floor((data.powerLevel * 360) / MAX_POWER_LEVEL),
+  }));
+
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="items-center pb-0">
@@ -39,9 +45,9 @@ function PowerLevelChart() {
           className="mx-auto aspect-square max-h-[250px]"
         >
           <RadialBarChart
-            data={chartData}
+            data={data}
             startAngle={0}
-            endAngle={250}
+            endAngle={data?.[0].endAngle}
             outerRadius={100}
             innerRadius={80}
           >
@@ -69,7 +75,7 @@ function PowerLevelChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-4xl font-bold"
                         >
-                          {chartData[0].powerLevel.toLocaleString()}
+                          {data?.[0].powerLevel.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}
