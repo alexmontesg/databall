@@ -7,6 +7,7 @@ import SiteHeader from "@/components/organisms/header";
 import Sidebar from "@/components/organisms/sidebar";
 import SiteFooter from "@/components/organisms/footer";
 import QueryProvider from "@/components/providers/query-provider";
+import ChatWidget from "@/features/chatbot/components/chat-widget";
 
 const playfairDisplayHeading = Playfair_Display({
   subsets: ["latin"],
@@ -58,9 +59,10 @@ export default function RootLayout({
               <QueryProvider>{children}</QueryProvider>
             </main>
           </div>
-
           <SiteFooter />
         </div>
+
+        <ChatWidget />
       </body>
     </html>
   );
