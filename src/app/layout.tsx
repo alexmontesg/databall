@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import SiteHeader from "@/components/organisms/header";
 import Sidebar from "@/components/organisms/sidebar";
 import SiteFooter from "@/components/organisms/footer";
+import QueryProvider from "@/components/providers/query-provider";
 
 const playfairDisplayHeading = Playfair_Display({
   subsets: ["latin"],
@@ -54,7 +55,7 @@ export default function RootLayout({
           <div className="grid grid-cols-1 md:grid-cols-[225px_1fr] flex-1">
             <Sidebar />
             <main className="flex flex-1 flex-col gap-8 w-full py-8 px-4 md:px-12">
-              {children}
+              <QueryProvider>{children}</QueryProvider>
             </main>
           </div>
 

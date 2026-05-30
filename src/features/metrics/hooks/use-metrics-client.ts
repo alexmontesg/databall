@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 async function getMetric(metric: string) {
   const res = await fetch(`/api/metrics/${metric}`);
@@ -6,16 +6,10 @@ async function getMetric(metric: string) {
 }
 
 export default function useMetricsClient<T>(metric: string) {
-  const [data, setData] = useState<T>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    getMetric(metric)
-      .then(setData)
-      .catch(setError)
-      .finally(() => setIsLoading(false));
-  }, [metric]);
+  const { data, isLoading, error } = useQuery<T>({
+    queryKey: ["metrics", metric],
+    queryFn: () => getMetric(metric),
+  });
 
   return { chartData: data, isLoading, error };
 }

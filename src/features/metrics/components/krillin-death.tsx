@@ -9,7 +9,6 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import useMetricsClient from "../hooks/use-metrics-client";
 import ErrorState from "@/components/organisms/error-state";
@@ -21,7 +20,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function KrillinDeathChart() {
+export default function KrillinDeathChart() {
   const { chartData, isLoading, error } =
     useMetricsClient<Array<{ saga: string; probability: number }>>("krillin");
   if (isLoading) return <Skeleton className="h-96" />;
@@ -62,7 +61,3 @@ function KrillinDeathChart() {
     </Card>
   );
 }
-
-export default dynamic(() => Promise.resolve({ default: KrillinDeathChart }), {
-  loading: () => <Skeleton className="h-full" />,
-});

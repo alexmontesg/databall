@@ -4,9 +4,8 @@ import ErrorState from "@/components/organisms/error-state";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import useMetricsClient from "../hooks/use-metrics-client";
-import dynamic from "next/dynamic";
 
-function BallsFound() {
+export default function BallsFound() {
   const { chartData, isLoading, error } = useMetricsClient<{ value: number }>(
     "balls",
   );
@@ -29,7 +28,3 @@ function BallsFound() {
     </Card>
   );
 }
-
-export default dynamic(() => Promise.resolve({ default: BallsFound }), {
-  loading: () => <Skeleton className="h-full" />,
-});

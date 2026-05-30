@@ -10,7 +10,6 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
-import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import useMetricsClient from "../hooks/use-metrics-client";
 import ErrorState from "@/components/organisms/error-state";
@@ -22,7 +21,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function PowerLevelChart() {
+export default function PowerLevelChart() {
   const { chartData, isLoading, error } =
     useMetricsClient<Array<{ powerLevel: number }>>("power-level");
   if (isLoading) return <Skeleton className="h-80" />;
@@ -96,7 +95,3 @@ function PowerLevelChart() {
     </Card>
   );
 }
-
-export default dynamic(() => Promise.resolve({ default: PowerLevelChart }), {
-  loading: () => <Skeleton className="h-full" />,
-});

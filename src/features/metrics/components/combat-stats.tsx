@@ -15,7 +15,6 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
-import dynamic from "next/dynamic";
 import { Skeleton } from "@/components/ui/skeleton";
 import useMetricsClient from "../hooks/use-metrics-client";
 import ErrorState from "@/components/organisms/error-state";
@@ -27,7 +26,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-function CombatStatsChart() {
+export default function CombatStatsChart() {
   const { chartData, isLoading, error } =
     useMetricsClient<Array<{ name: string; value: number }>>("stats");
   if (isLoading) return <Skeleton className="h-80" />;
@@ -55,7 +54,3 @@ function CombatStatsChart() {
     </Card>
   );
 }
-
-export default dynamic(() => Promise.resolve({ default: CombatStatsChart }), {
-  loading: () => <Skeleton className="h-full" />,
-});
