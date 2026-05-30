@@ -15,6 +15,8 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const chartData = [
   { name: "Health", value: 2 },
@@ -31,7 +33,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function CombatStatsChart() {
+function CombatStatsChart() {
   return (
     <Card className="h-full">
       <CardHeader className="items-center pb-4">
@@ -54,3 +56,7 @@ export default function CombatStatsChart() {
     </Card>
   );
 }
+
+export default dynamic(() => Promise.resolve({ default: CombatStatsChart }), {
+  loading: () => <Skeleton className="h-full" />,
+});

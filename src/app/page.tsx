@@ -1,29 +1,7 @@
-import dynamic from "next/dynamic";
-
-import { Skeleton } from "@/components/ui/skeleton";
-
 import BallsFound from "@/features/metrics/components/balls-found";
-
-const PowerLevelChart = dynamic(
-  () => import("@/features/metrics/components/power-level"),
-  {
-    loading: () => <Skeleton className="h-full" />,
-  },
-);
-
-const CombatStatsChart = dynamic(
-  () => import("@/features/metrics/components/combat-stats"),
-  {
-    loading: () => <Skeleton className="h-full" />,
-  },
-);
-
-const KrillinDeathChart = dynamic(
-  () => import("@/features/metrics/components/krillin-death"),
-  {
-    loading: () => <Skeleton className="h-full" />,
-  },
-);
+import CombatStatsChart from "@/features/metrics/components/combat-stats";
+import KrillinDeathChart from "@/features/metrics/components/krillin-death";
+import PowerLevelChart from "@/features/metrics/components/power-level";
 
 export default function Home() {
   return (

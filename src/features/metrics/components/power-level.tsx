@@ -10,6 +10,8 @@ import {
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ChartContainer, type ChartConfig } from "@/components/ui/chart";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const chartData = [
   { character: "goku", powerLevel: 9001, fill: "var(--color-goku)" },
@@ -25,7 +27,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function PowerLevelChart() {
+function PowerLevelChart() {
   return (
     <Card className="flex flex-col h-full">
       <CardHeader className="items-center pb-0">
@@ -88,3 +90,7 @@ export default function PowerLevelChart() {
     </Card>
   );
 }
+
+export default dynamic(() => Promise.resolve({ default: PowerLevelChart }), {
+  loading: () => <Skeleton className="h-full" />,
+});

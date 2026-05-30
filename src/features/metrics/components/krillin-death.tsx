@@ -9,6 +9,8 @@ import {
   ChartTooltipContent,
   type ChartConfig,
 } from "@/components/ui/chart";
+import dynamic from "next/dynamic";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const chartData = [
   { saga: "Original DB", probability: 5 },
@@ -28,7 +30,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export default function KrillinDeathChart() {
+function KrillinDeathChart() {
   return (
     <Card>
       <CardHeader>
@@ -64,3 +66,7 @@ export default function KrillinDeathChart() {
     </Card>
   );
 }
+
+export default dynamic(() => Promise.resolve({ default: KrillinDeathChart }), {
+  loading: () => <Skeleton className="h-full" />,
+});
