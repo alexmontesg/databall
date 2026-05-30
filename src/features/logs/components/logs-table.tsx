@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table";
 import { useLogsStore } from "@/features/logs/stores/logs-store";
 import { cn } from "@/lib/utils";
+import useFilters from "../hooks/use-filters";
 
 const levelStyles = {
   INFO: "text-cyan-400",
@@ -19,6 +20,10 @@ const levelStyles = {
 
 export default function LogsTable() {
   const logs = useLogsStore((s) => s.logs);
+  const { levels } = useFilters();
+  const filteredLogs = logs.filter((l) => {
+    return levels.length === 0 || levels.includes(l.level);
+  });
 
   return (
     <div className="max-h-[600px] overflow-auto">
@@ -32,7 +37,7 @@ export default function LogsTable() {
         </TableHeader>
 
         <TableBody>
-          {logs.map((log) => (
+          {filteredLogs.map((log) => (
             <TableRow key={log.id}>
               <TableCell className="w-[140px] text-xs text-muted-foreground">
                 {new Date(log.timestamp).toLocaleTimeString()}
