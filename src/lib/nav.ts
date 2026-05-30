@@ -1,4 +1,4 @@
-import { ClipboardClock, House } from "lucide-react";
+import { ClipboardClock, House, MonitorCloud } from "lucide-react";
 
 export const navItems = [
   {
@@ -10,5 +10,10 @@ export const navItems = [
     label: "Logs",
     href: "/logs",
     icon: ClipboardClock,
+  },
+  {
+    label: "Environments",
+    href: "/environments",
+    icon: MonitorCloud,
   },
 ];
