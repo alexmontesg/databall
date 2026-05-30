@@ -1,6 +1,7 @@
 import { GlobeCheck, GlobeOff } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import PlanetControls from "./planet-controls";
+import DeployControls from "./deploy-controls";
 
 export interface EnvironmentDetailPlanet {
   id: number;
@@ -43,6 +44,21 @@ export default function EnvironmentDetail({ planet }: EnvironmentDetailProps) {
         </CardHeader>
         <CardContent>{planet.version.version}</CardContent>
       </Card>
+
+      {planet.isUp && (
+        <Card>
+          <CardHeader>
+            <CardTitle>Change Version</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <DeployControls
+              planetId={planet.id}
+              currentVersionId={planet.version.id}
+              availableVersions={planet.availableVersions}
+            />
+          </CardContent>
+        </Card>
+      )}
     </>
   );
 }

@@ -10,3 +10,10 @@ export function setPlanetIsUp(id: number, isUp: boolean) {
     planet.isUp = isUp;
   }
 }
+
+export function setPlanetVersion(id: number, versionId: number) {
+  const planet = planets.find((p) => p.id === id);
+  if (planet) {
+    planet.version = versionId;
+  }
+}

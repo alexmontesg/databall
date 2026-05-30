@@ -10,7 +10,7 @@ All API data is hardcoded in Next.js route handlers to simulate an external moni
 | --------------- | ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `/`             | **Overview**     | 4 metric widgets (power level radial bar, combat stats radar, dragon balls count, Krillin death-probability line chart). Data fetched client-side from `/api/metrics/*`.                                                                     |
 | `/logs`         | **Logs**         | Real-time SSE stream (`/api/logs/stream`) pushing random Dragon Ball-themed log events. Zustand store (capped at 200 entries). URL-based filtering by log level (`INFO` / `WARNING` / `CRITICAL`).                                           |
-| `/environments` | **Environments** | Server-fetched planet list (`/api/planets`) with detail pages (`/environments/[id]`) that compose data from `/api/planets/[id]` and `/api/versions`. Destroy a running planet or Summon Shenron to revive one via `PATCH /api/planets/[id]`. |
+| `/environments` | **Environments** | Server-fetched planet list (`/api/planets`) with detail pages (`/environments/[id]`) that compose data from `/api/planets/[id]` and `/api/versions`. Destroy a running planet or Summon Shenron to revive one via `PATCH /api/planets/[id]`. Train with Whis to upgrade a planet's version, or Whis Rollback to downgrade. |
 
 ## Getting Started
 

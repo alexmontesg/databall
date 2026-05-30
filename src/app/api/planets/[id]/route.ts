@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { planets, setPlanetIsUp } from "../planets";
+import { planets, setPlanetIsUp, setPlanetVersion } from "../planets";
 
 export async function GET(
   req: Request,
@@ -43,14 +43,26 @@ export async function PATCH(
 
   const body = await req.json();
 
-  if (typeof body.isUp !== "boolean") {
-    return new Response(JSON.stringify({ error: "isUp must be a boolean" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
+  if (body.isUp !== undefined) {
+    if (typeof body.isUp !== "boolean") {
+      return new Response(JSON.stringify({ error: "isUp must be a boolean" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    setPlanetIsUp(planetId, body.isUp);
   }
 
-  setPlanetIsUp(planetId, body.isUp);
+  if (body.version !== undefined) {
+    if (typeof body.version !== "number") {
+      return new Response(JSON.stringify({ error: "version must be a number" }), {
+        status: 400,
+        headers: { "Content-Type": "application/json" },
+      });
+    }
+    setPlanetVersion(planetId, body.version);
+  }
+
   const updated = planets.find((p) => p.id === planetId);
 
   return new Response(JSON.stringify(updated), {
