@@ -18,6 +18,13 @@ const CombatStatsChart = dynamic(
   },
 );
 
+const KrillinDeathChart = dynamic(
+  () => import("@/features/metrics/components/krillin-death"),
+  {
+    loading: () => <Skeleton className="h-full" />,
+  },
+);
+
 export default function Home() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
@@ -29,6 +36,9 @@ export default function Home() {
       </div>
       <div className="h-full">
         <BallsFound />
+      </div>
+      <div className="h-full col-span-1 md:col-span-2 lg:col-span-3">
+        <KrillinDeathChart />
       </div>
     </div>
   );
